@@ -177,13 +177,13 @@ Add an index for each distance function you want to use.
 L2 distance:
 
 ```sql
-CREATE INDEX ON items USING shnsw (embedding svectorl2_ops);
+CREATE INDEX ON items USING shnsw (embedding svector_l2_ops);
 ```
 
 Inner product:
 
 ```sql
-CREATE INDEX ON items USING shnsw (embedding svectorip_ops);
+CREATE INDEX ON items USING shnsw (embedding svector_ip_ops);
 ```
 
 Cosine distance:
@@ -202,7 +202,7 @@ Specify HNSW parameters:
 - `ef_construction` - the size of the dynamic candidate list for constructing the graph (64 by default)
 
 ```sql
-CREATE INDEX ON items USING shnsw (embedding svectorl2_ops) WITH (m = 16, ef_construction = 64);
+CREATE INDEX ON items USING shnsw (embedding svector_l2_ops) WITH (m = 16, ef_construction = 64);
 ```
 
 ### Query Options
@@ -254,7 +254,7 @@ CREATE INDEX ON items (category_id);
 Or a [partial index](https://www.postgresql.org/docs/current/indexes-partial.html) on the svector column for approximate search:
 
 ```sql
-CREATE INDEX ON items USING ivfflat (embedding svectorl2_ops) WITH (lists = 100)
+CREATE INDEX ON items USING ivfflat (embedding svector_l2_ops) WITH (lists = 100)
     WHERE (category_id = 123);
 ```
 
